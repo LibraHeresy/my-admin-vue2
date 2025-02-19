@@ -47,12 +47,23 @@
           @click="() => (collapsed = !collapsed)"
         />
       </a-layout-header>
-      <a-layout-content
-        :style="{
-          margin: '24px',
-        }"
-      >
-        <router-view />
+      <a-layout-content>
+        <div class="content-header">
+          <a-breadcrumb>
+            <a-breadcrumb-item>首页</a-breadcrumb-item>
+            <a-breadcrumb-item v-for="title in breadcrumbs" :key="title">
+              <a href="">{{ title }}</a>
+            </a-breadcrumb-item>
+          </a-breadcrumb>
+          {{ breadcrumbs[breadcrumbs.length - 1] || "" }}
+        </div>
+        <div
+          :style="{
+            margin: '24px',
+          }"
+        >
+          <router-view />
+        </div>
       </a-layout-content>
     </a-layout>
   </a-layout>
@@ -72,6 +83,7 @@ export default {
       menusMap: {},
       openKeys: [],
       tempOpenKeys: [],
+      breadcrumbs: [],
     };
   },
   created() {
@@ -109,6 +121,21 @@ export default {
       console.log(e);
       if (e.key === this.$router.currentRoute.path) return;
       this.$router.push(e.key);
+      this.getBreadcrumb();
+    },
+    getBreadcrumb() {
+      const arr = this.getBreadcrumbTitle(this.$route.path);
+      this.breadcrumbs = arr.reverse();
+    },
+    getBreadcrumbTitle(path) {
+      let breadcrumb = [];
+      const ob = this.menusMap[path];
+      console.log(this.menusMap, ob);
+      breadcrumb.push(ob?.meta?.title || "");
+      if (ob.parentPath) {
+        breadcrumb = breadcrumb.concat(this.getBreadcrumbTitle(ob.parentPath));
+      }
+      return breadcrumb;
     },
   },
 };
@@ -150,5 +177,18 @@ export default {
 #components-layout-demo-custom-trigger .title {
   margin-left: 8px;
   white-space: nowrap;
+}
+
+#components-layout-demo-custom-trigger .content-header {
+  background-color: #ffffff;
+  margin-top: 2px;
+  height: 80px;
+  color: rgba(0, 0, 0, 0.85);
+  font-weight: 600;
+  font-size: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 24px;
 }
 </style>
