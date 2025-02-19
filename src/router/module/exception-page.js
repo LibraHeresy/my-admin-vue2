@@ -1,5 +1,3 @@
-import BasicLayout from "@/layout/BasicLayout.vue";
-
 const routes = [
   {
     path: "/exception-page",
@@ -8,7 +6,9 @@ const routes = [
     meta: {
       title: "异常页",
     },
-    component: BasicLayout,
+    component: {
+      render: (h) => h("router-view"),
+    },
     children: [
       {
         path: "/exception-page/no-permission",

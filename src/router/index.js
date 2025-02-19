@@ -1,17 +1,23 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+import BasicLayout from "@/layout/BasicLayout.vue";
 import ComponentRepository from "./module/component-repository";
 import ExceptionPage from "./module/exception-page";
+import Workbenches from "./module/workbenches";
 
 Vue.use(VueRouter);
 
 const routes = [
-  ...ComponentRepository,
-  ...ExceptionPage,
   {
     path: "/",
-    redirect: "/home",
+    redirect: "/workbenches",
     hideInMenu: true,
+  },
+  {
+    path: "/menu",
+    name: "menu",
+    component: BasicLayout,
+    children: [...Workbenches, ...ComponentRepository, ...ExceptionPage],
   },
   {
     path: "/login",

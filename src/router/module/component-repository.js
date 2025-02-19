@@ -1,26 +1,15 @@
-import BasicLayout from "@/layout/BasicLayout.vue";
-
 const routes = [
   {
     path: "/component-repository",
-    redirect: "/home",
+    name: "component-repository",
+    redirect: "/workbenches",
     meta: {
       title: "组件库",
     },
-    component: BasicLayout,
-    children: [
-      {
-        path: "/home",
-        name: "home",
-        meta: {
-          title: "首页",
-        },
-        component: () =>
-          import(
-            /* webpackChunkName: "component-repository" */ "@/views/HomeView.vue"
-          ),
-      },
-    ],
+    component: {
+      render: (h) => h("router-view"),
+    },
+    children: [],
   },
 ];
 

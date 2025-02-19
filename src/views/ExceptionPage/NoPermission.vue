@@ -1,5 +1,6 @@
 <template>
   <a-result
+    class="my-body"
     status="403"
     title="403"
     sub-title="Sorry, you are not authorized to access this page."
@@ -18,3 +19,6 @@ export default {
   },
 };
 </script>
+<style lang="less" scoped>
+@import "@/style/common.less";
+</style>

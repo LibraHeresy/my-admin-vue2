@@ -1,5 +1,10 @@
 <template>
-  <a-result status="500" title="500" sub-title="Sorry, the server is wrong.">
+  <a-result
+    class="my-body"
+    status="500"
+    title="500"
+    sub-title="Sorry, the server is wrong."
+  >
     <template #extra>
       <a-button type="primary" @click="$router.push({ path: '/' })">
         Back Home
@@ -14,3 +19,6 @@ export default {
   },
 };
 </script>
+<style lang="less" scoped>
+@import "@/style/common.less";
+</style>

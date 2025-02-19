@@ -1,6 +1,11 @@
 <template>
   <a-layout id="components-layout-demo-custom-trigger">
-    <a-layout-sider v-model="collapsed" :trigger="null" collapsible>
+    <a-layout-sider
+      v-model="collapsed"
+      :trigger="null"
+      collapsible
+      :width="240"
+    >
       <div class="logo-wrapper">
         <img
           class="logo"
@@ -44,9 +49,7 @@
       </a-layout-header>
       <a-layout-content
         :style="{
-          margin: '24px 16px',
-          padding: '24px',
-          background: '#fff',
+          margin: '24px',
         }"
       >
         <router-view />
@@ -72,7 +75,9 @@ export default {
     };
   },
   created() {
-    this.menus = this.$router.options.routes;
+    const menuRoute =
+      this.$router.options.routes.find((item) => item.name === "menu") || {};
+    this.menus = menuRoute?.children || [];
     this.setMenusMap(this.menus);
     this.openKeys = [this.menusMap[this.$route.path]?.parentPath || ""];
     console.log(this.menus);
