@@ -55,7 +55,7 @@
         </div>
         <div
           :style="{
-            margin: '24px',
+            padding: '24px',
           }"
         >
           <router-view />
