@@ -5,6 +5,7 @@ const routes = [
     redirect: "/exception-page/not-found",
     meta: {
       title: "异常页",
+      icon: "warning",
     },
     component: {
       render: (h) => h("router-view"),
@@ -12,7 +13,7 @@ const routes = [
     children: [
       {
         path: "/exception-page/no-permission",
-        name: "no-permission",
+        name: "NoPermission",
         meta: {
           title: "403",
         },
@@ -23,7 +24,7 @@ const routes = [
       },
       {
         path: "/exception-page/not-found",
-        name: "not-found",
+        name: "NotFound",
         meta: {
           title: "404",
         },
@@ -34,7 +35,7 @@ const routes = [
       },
       {
         path: "/exception-page/server-error",
-        name: "server-error",
+        name: "ServerError",
         meta: {
           title: "500",
         },

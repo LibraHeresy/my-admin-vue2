@@ -1,5 +1,5 @@
 <template>
-  <div class="my-login-page">
+  <div class="my-login">
     <div class="login-form">
       <div class="title">My-Admin-Vue2</div>
       <a-tabs
@@ -12,10 +12,11 @@
       >
         <a-tab-pane key="1" tab="账号登录">
           <a-form-model
-            ref="ruleForm"
+            ref="refRuleForm"
             :model="ruleForm"
             :rules="rules"
-            v-bind="layout"
+            :label-col="layout.labelCol"
+            :wrapper-col="layout.wrapperCol"
           >
             <a-form-model-item has-feedback prop="account">
               <a-input
@@ -23,6 +24,7 @@
                 size="large"
                 type="text"
                 autocomplete="off"
+                :maxlength="20"
               >
                 <a-icon slot="prefix" type="user" />
               </a-input>
@@ -33,6 +35,7 @@
                 size="large"
                 type="password"
                 autocomplete="off"
+                :maxlength="20"
               >
                 <a-icon slot="prefix" type="lock" />
               </a-input>
@@ -44,7 +47,7 @@
         class="login-button"
         type="primary"
         size="large"
-        @click="submitForm('ruleForm')"
+        @click="submitForm()"
       >
         登录
       </a-button>
@@ -90,11 +93,13 @@ export default {
     };
   },
   methods: {
-    submitForm(formName) {
-      this.$refs[formName].validate((valid) => {
+    submitForm() {
+      this.$refs.refRuleForm.validate((valid) => {
         if (valid) {
           localStorage.setItem("token", "123");
-          this.$router.push("/home");
+          this.$router.push({
+            path: "/",
+          });
         } else {
           this.$notification.error({
             message: "登录失败",
@@ -109,7 +114,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.my-login-page {
+.my-login {
   height: 100vh;
   width: 100%;
   overflow: hidden;

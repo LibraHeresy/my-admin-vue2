@@ -1,7 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import BasicLayout from "@/layout/BasicLayout.vue";
-import ComponentRepository from "./module/component-repository";
+import ComponentRepository from "./module/example-page";
 import ExceptionPage from "./module/exception-page";
 import Workbenches from "./module/workbenches";
 
@@ -17,7 +17,23 @@ const routes = [
     path: "/menu",
     name: "menu",
     component: BasicLayout,
-    children: [...Workbenches, ...ComponentRepository, ...ExceptionPage],
+    children: [
+      ...Workbenches,
+      ...ComponentRepository,
+      ...ExceptionPage,
+      {
+        path: "/setting",
+        name: "MySetting",
+        meta: {
+          title: "个人设置",
+          icon: "setting",
+        },
+        component: () =>
+          import(
+            /* webpackChunkName: "exception-page" */ "@/views/Setting/MySetting.vue"
+          ),
+      },
+    ],
   },
   {
     path: "/login",

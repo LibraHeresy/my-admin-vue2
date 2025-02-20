@@ -1,9 +1,10 @@
 const routes = [
   {
     path: "/workbenches",
-    name: "workbenches",
+    name: "MyWorkbenches",
     meta: {
       title: "工作台",
+      icon: "desktop",
     },
     component: () =>
       import(

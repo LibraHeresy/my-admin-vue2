@@ -26,7 +26,7 @@
         <template v-for="item in menus">
           <template v-if="!item.hideInMenu">
             <a-menu-item v-if="!item.children" :key="item.path">
-              <a-icon :type="item.meta?.icon || 'menu'" />
+              <a-icon v-if="item.meta?.icon" :type="item.meta.icon" />
               <span v-if="!collapsed">{{ item.meta?.title }}</span>
             </a-menu-item>
             <SubMenu
@@ -86,14 +86,6 @@ export default {
       breadcrumbs: [],
     };
   },
-  created() {
-    const menuRoute =
-      this.$router.options.routes.find((item) => item.name === "menu") || {};
-    this.menus = menuRoute?.children || [];
-    this.setMenusMap(this.menus);
-    this.openKeys = [this.menusMap[this.$route.path]?.parentPath || ""];
-    console.log(this.menus);
-  },
   watch: {
     collapsed(val) {
       if (val) {
@@ -104,6 +96,22 @@ export default {
         this.tempOpenKeys = [];
       }
     },
+    "$route.path": {
+      handler() {
+        this.getBreadcrumb();
+      },
+      immediate: true,
+    },
+  },
+  created() {
+    const menuRoute =
+      this.$router.options.routes.find((item) => item.name === "menu") || {};
+    this.menus = menuRoute?.children || [];
+    this.setMenusMap(this.menus);
+    this.openKeys = [this.menusMap[this.$route.path]?.parentPath || ""];
+  },
+  mounted() {
+    this.getBreadcrumb();
   },
   methods: {
     setMenusMap(routes, parentPath = "") {
@@ -118,22 +126,22 @@ export default {
       });
     },
     handleMenuClick(e) {
-      console.log(e);
       if (e.key === this.$router.currentRoute.path) return;
-      this.$router.push(e.key);
-      this.getBreadcrumb();
+      this.$router.push({
+        path: e.key,
+      });
     },
     getBreadcrumb() {
       const arr = this.getBreadcrumbTitle(this.$route.path);
-      this.breadcrumbs = arr.reverse();
+      this.breadcrumbs = [...arr.reverse()];
     },
     getBreadcrumbTitle(path) {
       let breadcrumb = [];
       const ob = this.menusMap[path];
-      console.log(this.menusMap, ob);
       breadcrumb.push(ob?.meta?.title || "");
-      if (ob.parentPath) {
-        breadcrumb = breadcrumb.concat(this.getBreadcrumbTitle(ob.parentPath));
+      if (ob?.parentPath) {
+        const arr = this.getBreadcrumbTitle(ob.parentPath);
+        breadcrumb.push(...arr);
       }
       return breadcrumb;
     },
@@ -159,9 +167,6 @@ export default {
 #components-layout-demo-custom-trigger .logo-wrapper {
   height: 32px;
   margin: 16px;
-  color: #ffffff;
-  font-size: 16px;
-  font-weight: 600;
   text-align: center;
   display: flex;
   align-items: center;
@@ -169,14 +174,17 @@ export default {
 }
 
 #components-layout-demo-custom-trigger .logo {
-  width: 24px;
-  height: 24px;
+  width: 32px;
+  height: 32px;
   object-fit: contain;
 }
 
 #components-layout-demo-custom-trigger .title {
   margin-left: 8px;
   white-space: nowrap;
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 600;
 }
 
 #components-layout-demo-custom-trigger .content-header {

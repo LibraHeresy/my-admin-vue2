@@ -1,5 +1,5 @@
 <template>
-  <div class="my-workbenches-page">
+  <div class="my-workbenches">
     <div class="desc-cards">
       <MyCard class="desc-card" title="我的待办" :number="1" desc="这是描述" />
       <MyCard class="desc-card" title="我的待办" :number="1" desc="这是描述" />
@@ -38,7 +38,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.my-workbenches-page {
+.my-workbenches {
   .desc-cards {
     display: flex;
     align-items: center;
