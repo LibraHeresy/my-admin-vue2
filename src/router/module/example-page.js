@@ -19,6 +19,14 @@ const routes = [
         },
         component: () => import("@/views/ExamplePage/ListPage.vue"),
       },
+      {
+        path: "/example-page/detail-page",
+        name: "DetailPage",
+        meta: {
+          title: "详情页",
+        },
+        component: () => import("@/views/ExamplePage/DetailPage.vue"),
+      },
     ],
   },
 ];

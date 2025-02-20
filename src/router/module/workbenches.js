@@ -1,3 +1,5 @@
+import MyWorkbenches from "@/views/Workbenches/MyWorkbenches.vue";
+
 const routes = [
   {
     path: "/workbenches",
@@ -6,10 +8,7 @@ const routes = [
       title: "工作台",
       icon: "desktop",
     },
-    component: () =>
-      import(
-        /* webpackChunkName: "exception-page" */ "@/views/Workbenches/MyWorkbenches.vue"
-      ),
+    component: MyWorkbenches,
   },
 ];
 

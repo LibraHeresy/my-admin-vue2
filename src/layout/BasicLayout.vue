@@ -7,11 +7,7 @@
       :width="240"
     >
       <div class="logo-wrapper">
-        <img
-          class="logo"
-          src="https://preview.pro.antdv.com/assets/logo.b617e17f.svg"
-          alt="logo"
-        />
+        <img class="logo" src="@/assets/logo.png" alt="logo" />
         <template v-if="!collapsed">
           <div class="title">My-Admin-Vue2</div>
         </template>
