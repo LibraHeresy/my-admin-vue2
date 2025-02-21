@@ -3,6 +3,7 @@ import request from "./request";
 const userApi = {
   Login: "/auth/login",
   Logout: "/auth/logout",
+  GetWorkbenchesData: "/api/workbenches/getData",
 };
 
 export function login(parameter) {
@@ -13,10 +14,10 @@ export function login(parameter) {
   });
 }
 
-export function getSmsCaptcha(parameter) {
+export function getWorkbenchesData(parameter) {
   return request({
-    url: userApi.SendSms,
-    method: "post",
+    url: userApi.GetWorkbenchesData,
+    method: "get",
     data: parameter,
   });
 }

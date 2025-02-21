@@ -7,6 +7,8 @@ import Antdv from "ant-design-vue";
 import "ant-design-vue/dist/antd.css";
 Vue.use(Antdv);
 
+import "./mock/mock";
+
 Vue.config.productionTip = false;
 
 new Vue({
