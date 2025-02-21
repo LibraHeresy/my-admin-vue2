@@ -6,8 +6,8 @@
 </template>
 
 <script>
-import ListPageSearch from "./components/ListPageSearch.vue";
-import ListPageTable from "./components/ListPageTable.vue";
+import ListPageSearch from "./components/ListPage/ListPageSearch.vue";
+import ListPageTable from "./components/ListPage/ListPageTable.vue";
 
 export default {
   name: "ListPage",
