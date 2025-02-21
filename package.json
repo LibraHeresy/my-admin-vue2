@@ -4,12 +4,19 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
+    "serve:dev": "vue-cli-service serve --mode development",
+    "serve:preview": "vue-cli-service build --mode preview",
+    "serve:prod": "vue-cli-service serve --mode production",
     "build": "vue-cli-service build",
+    "build:dev": "vue-cli-service build --mode development",
+    "build:preview": "vue-cli-service build --mode preview",
+    "build:prod": "vue-cli-service build --mode production",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
     "ant-design-vue": "^1.7.8",
+    "axios": "^1.7.9",
     "core-js": "^3.8.3",
     "echarts": "^5.6.0",
     "moment": "^2.30.1",
