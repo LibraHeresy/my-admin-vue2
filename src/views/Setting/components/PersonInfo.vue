@@ -28,7 +28,7 @@
           <a-input
             v-model="ruleForm.email"
             placeholder="请输入邮箱"
-            :maxLength="20"
+            :maxLength="150"
           />
         </a-form-model-item>
       </template>
@@ -81,6 +81,18 @@ class CreateRuleForm {
 export default {
   name: "PersonInfo",
   data() {
+    function isValidEmail(email) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return emailRegex.test(email);
+    }
+    let checkEmail = (rule, value, callback) => {
+      if (!isValidEmail(value)) {
+        return callback(new Error("请输入正确的邮箱地址"));
+      } else {
+        callback();
+      }
+    };
+
     return {
       layout: {
         labelCol: { span: 4 },
@@ -105,8 +117,7 @@ export default {
         ],
         email: [
           {
-            required: true,
-            message: "请输入邮箱",
+            validator: checkEmail,
             trigger: "change",
           },
         ],

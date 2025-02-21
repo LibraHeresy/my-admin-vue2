@@ -9,6 +9,8 @@
             checked-children="暗色"
             un-checked-children="浅色"
             default-checked
+            :checked="theme === 'dark'"
+            @change="handleSwitchChange"
           />
         </template>
       </a-list-item>
@@ -25,6 +27,7 @@
 
 <script>
 import ColorPicker from "@/components/ColorPicker";
+import { mapState, mapMutations } from "vuex";
 
 export default {
   name: "CustomSetting",
@@ -36,7 +39,19 @@ export default {
       themeColor: "#ffffff",
     };
   },
-  methods: {},
+  computed: {
+    ...mapState("theme", ["theme"]),
+  },
+  methods: {
+    ...mapMutations("theme", ["setTheme"]),
+    handleSwitchChange(checked) {
+      if (checked) {
+        this.setTheme("dark");
+      } else {
+        this.setTheme("light");
+      }
+    },
+  },
 };
 </script>
 

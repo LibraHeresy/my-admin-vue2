@@ -5,15 +5,23 @@
       :trigger="null"
       collapsible
       :width="240"
+      :theme="theme"
     >
       <div class="logo-wrapper">
         <img class="logo" src="@/assets/logo.png" alt="logo" />
         <template v-if="!collapsed">
-          <div class="title">My-Admin-Vue2</div>
+          <div
+            class="title"
+            :style="{
+              color: theme === 'dark' ? '#fff' : '#000',
+            }"
+          >
+            My-Admin-Vue2
+          </div>
         </template>
       </div>
       <a-menu
-        theme="dark"
+        :theme="theme"
         mode="inline"
         :selectedKeys="[$route.path]"
         :openKeys.sync="openKeys"
@@ -65,6 +73,7 @@
   </a-layout>
 </template>
 <script>
+import { mapState } from "vuex";
 import SubMenu from "./SubMenu.vue";
 
 export default {
@@ -81,6 +90,9 @@ export default {
       tempOpenKeys: [],
       breadcrumbs: [],
     };
+  },
+  computed: {
+    ...mapState("theme", ["theme"]),
   },
   watch: {
     collapsed(val) {
