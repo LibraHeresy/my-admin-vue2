@@ -1,21 +1,26 @@
 <template>
   <div class="online-top-search">
-    <a-card title="Online Top Search" style="width: 100%; border-radius: 10px">
-      <a slot="extra" href="#">more</a>
+    <a-card title="在线搜索榜" style="width: 100%; border-radius: 10px">
       <div>
         <div class="online-top-search-charts">
           <div
             id="online-top-search-chart-one"
             class="online-top-search-chart-one"
           ></div>
-          <div
-            id="online-top-search-chart-two"
-            class="online-top-search-chart-two"
-          ></div>
         </div>
         <div class="online-top-search-content">
-          <a-table :columns="columns" :data-source="data" size="small">
-            <a slot="name" slot-scope="text">{{ text }}</a>
+          <a-table
+            :columns="columns"
+            :data-source="data"
+            size="small"
+            :pagination="{
+              pageSize: 5, // 每页显示 10 条
+            }"
+          >
+            <span slot="range" slot-scope="text">
+              {{ text }}
+              <a-icon type="caret-up" style="color: red" />
+            </span>
           </a-table>
         </div>
       </div>
@@ -29,90 +34,94 @@ import { GridComponent } from "echarts/components";
 import { LineChart } from "echarts/charts";
 import { UniversalTransition } from "echarts/features";
 import { CanvasRenderer } from "echarts/renderers";
-
 echarts.use([GridComponent, LineChart, CanvasRenderer, UniversalTransition]);
+
+import moment from "moment";
 
 export default {
   name: "OnlineTopSearch",
   data() {
     const columns = [
       {
-        title: "Name",
-        dataIndex: "name",
-        key: "name",
-        scopedSlots: { customRender: "name" },
+        title: "排行",
+        dataIndex: "rank",
+        key: "rank",
+        width: "80px",
       },
       {
-        title: "Age",
-        dataIndex: "age",
-        key: "age",
-        width: 80,
+        title: "关键词",
+        dataIndex: "keyword",
+        key: "keyword",
       },
       {
-        title: "Address",
-        dataIndex: "address",
-        key: "address 1",
+        title: "用户数",
+        dataIndex: "users",
+        key: "users",
         ellipsis: true,
       },
       {
-        title: "Long Column Long Column Long Column",
-        dataIndex: "address",
-        key: "address 2",
+        title: "每日上升趋势",
+        dataIndex: "range",
+        key: "range",
         ellipsis: true,
-      },
-      {
-        title: "Long Column Long Column",
-        dataIndex: "address",
-        key: "address 3",
-        ellipsis: true,
-      },
-      {
-        title: "Long Column",
-        dataIndex: "address",
-        key: "address 4",
-        ellipsis: true,
+        align: "right",
+        scopedSlots: { customRender: "range" },
       },
     ];
 
-    const data = [
+    let data = [
       {
         key: "1",
-        name: "John Brown",
-        age: 32,
-        address: "New York No. 1 Lake Park, New York No. 1 Lake Park",
-        tags: ["nice", "developer"],
+        rank: "1",
+        keyword: "搜索",
+        users: "1,000",
+        range: "+10%",
       },
       {
         key: "2",
-        name: "Jim Green",
-        age: 42,
-        address: "London No. 2 Lake Park, London No. 2 Lake Park",
-        tags: ["loser"],
+        rank: "2",
+        keyword: "搜索",
+        users: "1,000",
+        range: "+10%",
       },
       {
         key: "3",
-        name: "Joe Black",
-        age: 32,
-        address: "Sidney No. 1 Lake Park, Sidney No. 1 Lake Park",
-        tags: ["cool", "teacher"],
+        rank: "3",
+        keyword: "搜索",
+        users: "1,000",
+        range: "+10%",
       },
       {
         key: "4",
-        name: "Joe Black",
-        age: 32,
-        address: "Sidney No. 1 Lake Park, Sidney No. 1 Lake Park",
-        tags: ["cool", "teacher"],
+        rank: "4",
+        keyword: "搜索",
+        users: "1,000",
+        range: "+10%",
       },
       {
         key: "5",
-        name: "Joe Black",
-        age: 32,
-        address: "Sidney No. 1 Lake Park, Sidney No. 1 Lake Park",
-        tags: ["cool", "teacher"],
+        rank: "5",
+        keyword: "搜索",
+        users: "1,000",
+        range: "+10%",
       },
     ];
 
+    data = data.concat(
+      data.map((item) => ({
+        ...item,
+        rank: +item.rank + 5,
+      }))
+    );
+
+    const today = moment();
     const chartOption = {
+      tooltip: {
+        trigger: "axis",
+        axisPointer: {
+          type: "cross",
+        },
+      },
       grid: {
         left: "60px", // 距离容器左侧的距离
         right: "20px", // 距离容器右侧的距离
@@ -122,14 +131,34 @@ export default {
       xAxis: {
         type: "category",
         boundaryGap: false,
-        data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+        data: [
+          today.subtract(14, "days").format("YYYY-MM-DD"),
+          today.subtract(13, "days").format("YYYY-MM-DD"),
+          today.subtract(12, "days").format("YYYY-MM-DD"),
+          today.subtract(11, "days").format("YYYY-MM-DD"),
+          today.subtract(10, "days").format("YYYY-MM-DD"),
+          today.subtract(9, "days").format("YYYY-MM-DD"),
+          today.subtract(8, "days").format("YYYY-MM-DD"),
+          today.subtract(7, "days").format("YYYY-MM-DD"),
+          today.subtract(6, "days").format("YYYY-MM-DD"),
+          today.subtract(5, "days").format("YYYY-MM-DD"),
+          today.subtract(4, "days").format("YYYY-MM-DD"),
+          today.subtract(3, "days").format("YYYY-MM-DD"),
+          today.subtract(2, "days").format("YYYY-MM-DD"),
+          today.subtract(1, "days").format("YYYY-MM-DD"),
+        ],
       },
       yAxis: {
         type: "value",
       },
       series: [
         {
-          data: [820, 932, 901, 934, 1290, 1330, 1320],
+          smooth: 0.6,
+          symbol: "none",
+          data: [
+            820, 932, 901, 934, 1290, 1330, 1320, 932, 901, 934, 1290, 1290,
+            1330, 1320, 932,
+          ],
           type: "line",
           areaStyle: {},
         },
@@ -149,18 +178,13 @@ export default {
   },
   methods: {
     renderChart() {
-      if (this.myCharts.length < 2 || !this.myCharts.every((item) => item)) {
+      if (this.myCharts.length < 1 || !this.myCharts.every((item) => item)) {
         const chartDomOne = document.getElementById(
           "online-top-search-chart-one"
         );
-        const chartDomTwo = document.getElementById(
-          "online-top-search-chart-two"
-        );
         this.myCharts[0] = echarts.init(chartDomOne);
-        this.myCharts[1] = echarts.init(chartDomTwo);
       }
       this.myCharts[0].setOption(this.chartOption);
-      this.myCharts[1].setOption(this.chartOption);
     },
   },
   beforeDestroy() {
@@ -183,7 +207,7 @@ export default {
 
     & > div {
       height: 174px;
-      width: calc((100% - 24px) / 2);
+      width: 100%;
     }
   }
   .online-top-search-content {

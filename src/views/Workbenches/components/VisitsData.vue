@@ -1,7 +1,7 @@
 <template>
   <div class="sales-data">
     <div class="sales-data-chart-wrap">
-      <div class="sales-data-title">销售数据</div>
+      <div class="sales-data-title">访问数据</div>
       <div id="sales-data-chart" class="sales-data-chart"></div>
     </div>
   </div>
@@ -53,7 +53,7 @@ export default {
       },
       series: [
         {
-          data: [120, 200, 150, 80, 70, 110, 130, 120, 200, 150, 80, 70],
+          data: [120, 200, 150, 80, 70, 110, 130, 150, 80, 70, 110, 130],
           type: "bar",
         },
       ],

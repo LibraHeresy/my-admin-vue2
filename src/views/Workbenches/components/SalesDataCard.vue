@@ -6,7 +6,7 @@
     @tabChange="(key) => onTabChange(key)"
   >
     <SalesData ref="refSalesData" v-if="tab === 'sales'" />
-    <SalesData ref="refSalesData" v-if="tab === 'visits'" />
+    <VisitsData ref="refSalesData" v-if="tab === 'visits'" />
 
     <div slot="tabBarExtraContent">
       <a
@@ -25,12 +25,14 @@
 
 <script>
 import SalesData from "./SalesData.vue";
+import VisitsData from "./VisitsData.vue";
 import moment from "moment";
 
 export default {
   name: "SalesDataCard",
   components: {
     SalesData,
+    VisitsData,
   },
   data() {
     return {

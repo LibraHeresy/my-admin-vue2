@@ -13,7 +13,7 @@
           <a-input
             v-model="ruleForm.nickname"
             placeholder="请输入昵称"
-            :maxlength="20"
+            :maxLength="20"
           />
         </a-form-model-item>
         <a-form-model-item label="简介" prop="profile">
@@ -21,14 +21,14 @@
             v-model="ruleForm.profile"
             style="height: 100px"
             placeholder="请输入简介"
-            :maxlength="500"
+            :maxLength="500"
           />
         </a-form-model-item>
         <a-form-model-item label="邮箱" prop="email">
           <a-input
             v-model="ruleForm.email"
             placeholder="请输入邮箱"
-            :maxlength="20"
+            :maxLength="20"
           />
         </a-form-model-item>
       </template>

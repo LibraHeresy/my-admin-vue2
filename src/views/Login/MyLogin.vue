@@ -24,7 +24,7 @@
                 size="large"
                 type="text"
                 autocomplete="off"
-                :maxlength="20"
+                :maxLength="20"
               >
                 <a-icon slot="prefix" type="user" />
               </a-input>
@@ -35,7 +35,7 @@
                 size="large"
                 type="password"
                 autocomplete="off"
-                :maxlength="20"
+                :maxLength="20"
               >
                 <a-icon slot="prefix" type="lock" />
               </a-input>

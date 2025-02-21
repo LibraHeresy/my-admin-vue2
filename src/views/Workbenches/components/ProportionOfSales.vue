@@ -1,10 +1,6 @@
 <template>
   <div class="proportion-of-sales">
-    <a-card
-      title="The Proportion Of Sales"
-      style="width: 100%; border-radius: 10px"
-    >
-      <a slot="extra" href="#">more</a>
+    <a-card title="销售渠道占比" style="width: 100%; border-radius: 10px">
       <div>
         <div
           id="proportion-of-sales-chart"
@@ -67,11 +63,11 @@ export default {
             show: false,
           },
           data: [
-            { value: 1048, name: "Search Engine" },
-            { value: 735, name: "Direct" },
-            { value: 580, name: "Email" },
-            { value: 484, name: "Union Ads" },
-            { value: 300, name: "Video Ads" },
+            { value: 1048, name: "搜索引擎" },
+            { value: 735, name: "门户" },
+            { value: 580, name: "邮箱" },
+            { value: 484, name: "渠道广告" },
+            { value: 300, name: "视频广告" },
           ],
         },
       ],

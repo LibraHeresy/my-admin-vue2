@@ -44,7 +44,7 @@ const routes = [
   },
   {
     path: "*",
-    name: "NotFound",
+    name: "AllNotFound",
     hideInMenu: true,
     component: () =>
       import(

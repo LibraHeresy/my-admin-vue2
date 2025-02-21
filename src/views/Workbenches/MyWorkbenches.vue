@@ -1,30 +1,10 @@
 <template>
   <div class="my-workbenches">
     <div class="desc-cards">
-      <MyCard
-        class="desc-card"
-        title="销售总额"
-        :number="info.totalSales"
-        desc="每日销售额 ￥ 23456"
-      />
-      <MyCard
-        class="desc-card"
-        title="总访客数"
-        :number="info.totalVisitors"
-        desc="每日访客数 23456"
-      />
-      <MyCard
-        class="desc-card"
-        title="总订单数"
-        :number="info.totalOrders"
-        desc="成单率 60%"
-      />
-      <MyCard
-        class="desc-card"
-        title="完成进度"
-        :number="info.totalProgress"
-        desc="今日提升 20%"
-      />
+      <TotalSales class="desc-card" :info="info" />
+      <TotalVisitors ref="refTotalVisitors" class="desc-card" :info="info" />
+      <TotalOrders ref="refTotalOrders" class="desc-card" :info="info" />
+      <TotalProgress class="desc-card" :info="info" />
     </div>
 
     <SalesDataCard class="sales-data-card" />
@@ -37,40 +17,98 @@
 </template>
 
 <script>
-import MyCard from "./components/MyCard.vue";
 import SalesDataCard from "./components/SalesDataCard.vue";
 import OnlineTopSearch from "./components/OnlineTopSearch.vue";
 import ProportionOfSales from "./components/ProportionOfSales.vue";
 import { getWorkbenchesData } from "@/api/common";
+import TotalSales from "./components/TotalSales.vue";
+import TotalVisitors from "./components/TotalVisitors.vue";
+import TotalOrders from "./components/TotalOrders.vue";
+import TotalProgress from "./components/TotalProgress.vue";
 
 class CreateInfo {
   constructor() {
     // 销售总额
-    this.totalSales = "";
+    this.totalSales = 1021214;
     // 今日销售额
-    this.todaySales = "";
+    this.todaySales = 24355;
+    // 销售额增长率
+    this.salesIncreasePrecent = 50;
+    // 销售额下降率
+    this.salesDecreasePrecent = 50;
     // 总访客数
-    this.totalVisitors = "";
+    this.totalVisitors = 830355;
     // 今日访客数
-    this.todayVisitors = "";
-    // 总订单数
-    this.totalOrders = "";
+    this.todayVisitors = 93036;
+    // 7天访客数
+    (this.past7daysVisitors = [
+      {
+        visitors: 85738,
+      },
+      {
+        visitors: 11710,
+      },
+      {
+        visitors: 19806,
+      },
+      {
+        visitors: 57725,
+      },
+      {
+        visitors: 60947,
+      },
+      {
+        visitors: 65521,
+      },
+      {
+        visitors: 18719,
+      },
+    ]),
+      // 总订单数
+      (this.totalOrders = 36394641);
     // 今日订单数
-    this.todayOrders = "";
+    this.todayOrders = 22320;
+    // 7天订单数
+    this.past7daysOrders = [
+      {
+        orders: 74753,
+      },
+      {
+        orders: 94412,
+      },
+      {
+        orders: 12363,
+      },
+      {
+        orders: 19583,
+      },
+      {
+        orders: 69487,
+      },
+      {
+        orders: 16963,
+      },
+      {
+        orders: 15375,
+      },
+    ];
     // 完成进度
-    this.totalProgress = "";
-    // 今日完成进度
-    this.todayProcess = "";
+    this.totalProgress = 76;
+    // 今日进度
+    this.todayProcess = 16;
   }
 }
 
 export default {
   name: "MyWorkbenches",
   components: {
-    MyCard,
     SalesDataCard,
     OnlineTopSearch,
     ProportionOfSales,
+    TotalSales,
+    TotalVisitors,
+    TotalOrders,
+    TotalProgress,
   },
   data() {
     return {
@@ -81,6 +119,11 @@ export default {
     getWorkbenchesData({}).then((res) => {
       if (res.code === 200) {
         this.info = res.data;
+
+        setTimeout(() => {
+          this.$refs.refTotalVisitors.renderChart();
+          this.$refs.refTotalOrders.renderChart();
+        });
       }
     });
   },

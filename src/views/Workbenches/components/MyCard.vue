@@ -15,7 +15,9 @@
         <slot></slot>
       </div>
     </div>
-    <div class="my-card_footer">{{ desc }}</div>
+    <div class="my-card_footer">
+      <slot name="desc">{{ desc }}</slot>
+    </div>
   </div>
 </template>
 
@@ -88,7 +90,11 @@ export default {
       height: 38px;
     }
     .my-card_content-info {
+      height: 100%;
       flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
     }
   }
   .my-card_footer {
