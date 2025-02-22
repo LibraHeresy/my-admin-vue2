@@ -4,7 +4,7 @@ import router from "./router";
 import store from "./store";
 
 import Antdv from "ant-design-vue";
-import "ant-design-vue/dist/antd.css";
+import "ant-design-vue/dist/antd.less";
 Vue.use(Antdv);
 
 import "./mock/mock";
@@ -12,6 +12,8 @@ import "./mock/mock";
 import "@wangeditor/editor/dist/css/style.css";
 
 Vue.config.productionTip = false;
+
+import "less";
 
 new Vue({
   router,

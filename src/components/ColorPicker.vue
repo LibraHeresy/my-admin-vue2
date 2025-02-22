@@ -41,7 +41,6 @@ export default {
   },
   methods: {
     handleClick() {
-      console.log(123456);
       const dom = document.getElementById("color-picker-input");
       dom.click();
     },

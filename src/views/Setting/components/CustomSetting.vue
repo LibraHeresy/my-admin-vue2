@@ -18,7 +18,7 @@
         <a-list-item-meta title="主题色" description="页面风格配色设置">
         </a-list-item-meta>
         <template slot="extra">
-          <ColorPicker />
+          <ColorPicker @change="updateThemeColor" />
         </template>
       </a-list-item>
     </a-list>
@@ -49,6 +49,24 @@ export default {
         this.setTheme("dark");
       } else {
         this.setTheme("light");
+      }
+    },
+    updateThemeColor(color) {
+      if (window.less) {
+        console.log(window.less);
+        window.less
+          .modifyVars({
+            "@primary-color": color, // 新的主题色
+          })
+          .then(() => {
+            console.log("Theme changed successfully");
+            window.less.refreshStyles(); //好像可有可无
+          })
+          .catch((error) => {
+            console.error("Failed to change theme", error);
+          });
+      } else {
+        console.error("Less is not loaded correctly");
       }
     },
   },

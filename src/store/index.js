@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import createPersistedState from "vuex-persistedstate";
 import theme from "./modules/theme";
 import order from "./modules/order";
 import step from "./modules/step";
@@ -16,4 +17,5 @@ export default new Vuex.Store({
     order,
     step,
   },
+  plugins: [createPersistedState()],
 });
