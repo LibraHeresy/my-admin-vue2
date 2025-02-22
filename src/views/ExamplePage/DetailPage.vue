@@ -4,40 +4,21 @@
       <a-list-item>
         <a-list-item-meta>
           <template slot="description">
-            <a-descriptions title="User Info">
-              <a-descriptions-item label="UserName">
-                Zhou Maomao
+            <a-descriptions title="订单信息">
+              <a-descriptions-item label="订单号">
+                {{ order.orderNo }}
               </a-descriptions-item>
-              <a-descriptions-item label="Telephone">
-                1810000000
+              <a-descriptions-item label="订单金额">
+                {{ order.orderAmount }}
               </a-descriptions-item>
-              <a-descriptions-item label="Live">
-                Hangzhou, Zhejiang
+              <a-descriptions-item label="订单状态">
+                {{ order.orderStatus }}
               </a-descriptions-item>
-              <a-descriptions-item label="Remark"> empty </a-descriptions-item>
-              <a-descriptions-item label="Address">
-                No. 18, Wantang Road, Xihu District, Hangzhou, Zhejiang, China
+              <a-descriptions-item label="下单日期">
+                {{ order.orderDate }}
               </a-descriptions-item>
-            </a-descriptions>
-          </template>
-        </a-list-item-meta>
-      </a-list-item>
-      <a-list-item>
-        <a-list-item-meta>
-          <template slot="description">
-            <a-descriptions title="User Info">
-              <a-descriptions-item label="UserName">
-                Zhou Maomao
-              </a-descriptions-item>
-              <a-descriptions-item label="Telephone">
-                1810000000
-              </a-descriptions-item>
-              <a-descriptions-item label="Live">
-                Hangzhou, Zhejiang
-              </a-descriptions-item>
-              <a-descriptions-item label="Remark"> empty </a-descriptions-item>
-              <a-descriptions-item label="Address">
-                No. 18, Wantang Road, Xihu District, Hangzhou, Zhejiang, China
+              <a-descriptions-item label="订单类型">
+                {{ order.orderType }}
               </a-descriptions-item>
             </a-descriptions>
           </template>
@@ -46,28 +27,15 @@
       <a-list-item>
         <a-list-item-meta>
           <template slot="description">
-            <a-descriptions title="User Info" :column="1">
-              <a-descriptions-item>
-                <a-table
-                  :columns="columns"
-                  :data-source="data"
-                  :pagination="false"
-                />
+            <a-descriptions title="其他信息">
+              <a-descriptions-item label="工作人员">
+                {{ order.worker }}
               </a-descriptions-item>
-            </a-descriptions>
-          </template>
-        </a-list-item-meta>
-      </a-list-item>
-      <a-list-item>
-        <a-list-item-meta>
-          <template slot="description">
-            <a-descriptions title="User Info" :column="1">
-              <a-descriptions-item>
-                <a-table
-                  :columns="columns"
-                  :data-source="data"
-                  :pagination="false"
-                />
+              <a-descriptions-item label="支付渠道">
+                {{ order.orderPayment }}
+              </a-descriptions-item>
+              <a-descriptions-item label="备注">
+                {{ order.desc }}
               </a-descriptions-item>
             </a-descriptions>
           </template>
@@ -78,38 +46,15 @@
 </template>
 
 <script>
-const columns = [
-  {
-    title: "Name",
-    dataIndex: "name",
-  },
-  {
-    title: "Age",
-    dataIndex: "age",
-  },
-  {
-    title: "Address",
-    dataIndex: "address",
-  },
-];
-
-const data = [];
-for (let i = 0; i < 10; i++) {
-  data.push({
-    key: i,
-    name: `Edward King ${i}`,
-    age: 32,
-    address: `London, Park Lane no. ${i}`,
-  });
-}
+import { mapState } from "vuex";
 
 export default {
   name: "DetailPage",
   data() {
-    return {
-      columns,
-      data,
-    };
+    return {};
+  },
+  computed: {
+    ...mapState("order", ["order"]),
   },
   methods: {},
 };

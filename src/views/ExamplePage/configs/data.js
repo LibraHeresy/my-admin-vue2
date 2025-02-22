@@ -7,6 +7,7 @@ export const ListPageData = [
     orderType: "采购单",
     worker: "张三",
     orderPayment: "支付宝",
+    desc: "采购单描述",
   },
   {
     orderNo: "20200801-0002",
@@ -16,6 +17,7 @@ export const ListPageData = [
     orderType: "采购单",
     worker: "李四",
     orderPayment: "微信",
+    desc: "采购单描述",
   },
   {
     orderNo: "20200801-0003",
@@ -25,6 +27,7 @@ export const ListPageData = [
     orderType: "采购单",
     worker: "王五",
     orderPayment: "支付宝",
+    desc: "采购单描述",
   },
   {
     orderNo: "20200801-0004",
@@ -34,6 +37,7 @@ export const ListPageData = [
     orderType: "采购单",
     worker: "赵六",
     orderPayment: "微信",
+    desc: "采购单描述",
   },
   {
     orderNo: "20200801-0005",
@@ -43,6 +47,7 @@ export const ListPageData = [
     orderType: "采购单",
     worker: "孙七",
     orderPayment: "支付宝",
+    desc: "采购单描述",
   },
   {
     orderNo: "20200801-0006",

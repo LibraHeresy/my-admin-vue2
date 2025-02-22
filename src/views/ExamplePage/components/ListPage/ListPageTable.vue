@@ -45,6 +45,9 @@
       <template slot="index" slot-scope="text, record, index">
         <span> {{ index + 1 }} </span>
       </template>
+      <template slot="orderNo" slot-scope="text, record">
+        <a @click="toDetailPage(record)"> {{ text }} </a>
+      </template>
     </a-table>
 
     <AddOrderModal
@@ -61,6 +64,7 @@
 import { ListPageColumns } from "../../configs/config";
 import { ListPageData } from "../../configs/data";
 import AddOrderModal from "./AddOrderModal.vue";
+import { mapMutations } from "vuex";
 
 export default {
   name: "ListPageTable",
@@ -84,6 +88,7 @@ export default {
     },
   },
   methods: {
+    ...mapMutations("order", ["setOrder"]),
     onSelectChange(selectedRowKeys) {
       this.selectedRowKeys = selectedRowKeys;
     },
@@ -117,6 +122,15 @@ export default {
     },
     handleReset() {
       this.data = [...ListPageData];
+    },
+    toDetailPage(order) {
+      this.setOrder(order);
+      this.$router.push({
+        name: "DetailPage",
+        params: {
+          orderNo: order.orderNo,
+        },
+      });
     },
   },
 };
