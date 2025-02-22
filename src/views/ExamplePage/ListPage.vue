@@ -1,7 +1,7 @@
 <template>
   <a-card style="border-radius: 10px" :bordered="false">
-    <ListPageSearch />
-    <ListPageTable />
+    <ListPageSearch @search="handleSearch" @reset="handleReset" />
+    <ListPageTable ref="refListPageTable" />
   </a-card>
 </template>
 
@@ -18,7 +18,14 @@ export default {
   data() {
     return {};
   },
-  methods: {},
+  methods: {
+    handleSearch(value) {
+      this.$refs.refListPageTable.handleSearch(value);
+    },
+    handleReset() {
+      this.$refs.refListPageTable.handleReset();
+    },
+  },
 };
 </script>
 

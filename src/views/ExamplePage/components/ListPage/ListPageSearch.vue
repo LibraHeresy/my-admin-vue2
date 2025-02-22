@@ -7,46 +7,59 @@
   >
     <a-row>
       <a-col :span="8">
-        <a-form-model-item label="Field A" prop="fieldA">
-          <a-input v-model="ruleForm.fieldA" placeholder="input placeholder" />
+        <a-form-model-item label="订单号" prop="orderNo">
+          <a-input v-model="ruleForm.orderNo" placeholder="请输入订单号" />
         </a-form-model-item>
       </a-col>
       <a-col :span="8">
-        <a-form-model-item label="Field B" prop="fieldB">
-          <a-input v-model="ruleForm.fieldB" placeholder="input placeholder" />
+        <a-form-model-item label="订单状态" prop="orderStatus">
+          <a-select v-model="ruleForm.orderStatus" placeholder="请选择订单状态">
+            <a-select-option
+              v-for="item in OrderStatusDict"
+              :key="item.key"
+              :value="item.value"
+            >
+              {{ item.value }}
+            </a-select-option>
+          </a-select>
         </a-form-model-item>
       </a-col>
       <template v-if="advanced">
         <a-col :span="8">
-          <a-form-model-item label="Field C" prop="fieldC">
+          <a-form-model-item label="订单类型" prop="orderType">
+            <a-select v-model="ruleForm.orderType" placeholder="请选择订单类型">
+              <a-select-option
+                v-for="item in OrderTypeDict"
+                :key="item.key"
+                :value="item.value"
+              >
+                {{ item.value }}
+              </a-select-option>
+            </a-select>
+          </a-form-model-item>
+        </a-col>
+        <a-col :span="8">
+          <a-form-model-item label="工作人员" prop="worker">
             <a-input
-              v-model="ruleForm.fieldC"
-              placeholder="input placeholder"
+              v-model="ruleForm.worker"
+              placeholder="请输入工作人员姓名"
             />
           </a-form-model-item>
         </a-col>
         <a-col :span="8">
-          <a-form-model-item label="Field D" prop="fieldD">
-            <a-input
-              v-model="ruleForm.fieldD"
-              placeholder="input placeholder"
-            />
-          </a-form-model-item>
-        </a-col>
-        <a-col :span="8">
-          <a-form-model-item label="Field E" prop="fieldE">
-            <a-input
-              v-model="ruleForm.fieldE"
-              placeholder="input placeholder"
-            />
-          </a-form-model-item>
-        </a-col>
-        <a-col :span="8">
-          <a-form-model-item label="Field F" prop="fieldF">
-            <a-input
-              v-model="ruleForm.fieldF"
-              placeholder="input placeholder"
-            />
+          <a-form-model-item label="支付渠道" prop="orderPayment">
+            <a-select
+              v-model="ruleForm.orderPayment"
+              placeholder="请选择支付渠道"
+            >
+              <a-select-option
+                v-for="item in OrderPayMentDict"
+                :key="item.key"
+                :value="item.value"
+              >
+                {{ item.value }}
+              </a-select-option>
+            </a-select>
           </a-form-model-item>
         </a-col>
       </template>
@@ -55,10 +68,8 @@
         <span
           :style="(advanced && { float: 'right', overflow: 'hidden' }) || {}"
         >
-          <a-button type="primary" @click="$refs.table.refresh(true)">
-            查询
-          </a-button>
-          <a-button style="margin-left: 8px" @click="() => (queryParam = {})">
+          <a-button type="primary" @click="handleSearch"> 查询 </a-button>
+          <a-button style="margin-left: 8px" @click="handleReset">
             重置
           </a-button>
           <a @click="toggleAdvanced" style="margin-left: 8px">
@@ -71,20 +82,34 @@
   </a-form-model>
 </template>
 <script>
+import {
+  OrderStatusDict,
+  OrderTypeDict,
+  OrderPayMentDict,
+} from "../../configs/dict";
+
 class CreateRuleForm {
   constructor() {
-    this.fieldA = "";
-    this.fieldB = "";
-    this.fieldC = "";
-    this.fieldD = "";
-    this.fieldE = "";
-    this.fieldG = "";
+    // 订单号
+    this.orderNo = "";
+    // 订单状态
+    this.orderStatus = undefined;
+    // 订单类型
+    this.orderType = undefined;
+    // 工作人员
+    this.worker = "";
+    // 支付渠道
+    this.orderPayment = undefined;
   }
 }
 
 export default {
   data() {
     return {
+      OrderStatusDict,
+      OrderTypeDict,
+      OrderPayMentDict,
+
       layout: {
         labelCol: { span: 4 },
         wrapperCol: { span: 17 },
@@ -96,6 +121,13 @@ export default {
   methods: {
     toggleAdvanced() {
       this.advanced = !this.advanced;
+    },
+    handleReset() {
+      this.ruleForm = new CreateRuleForm();
+      this.$emit("reset");
+    },
+    handleSearch() {
+      this.$emit("search", { ...this.ruleForm });
     },
   },
 };
