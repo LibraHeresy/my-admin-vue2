@@ -9,6 +9,8 @@ Vue.use(Antdv);
 
 import "./mock/mock";
 
+import "@wangeditor/editor/dist/css/style.css";
+
 Vue.config.productionTip = false;
 
 new Vue({

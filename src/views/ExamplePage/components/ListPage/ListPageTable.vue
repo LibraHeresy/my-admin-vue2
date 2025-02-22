@@ -13,6 +13,7 @@
         title="你确定要删除选择的订单吗?"
         ok-text="确定"
         cancel-text="取消"
+        :disabled="!hasSelected"
         @confirm="handleDelete"
       >
         <a-button
@@ -45,14 +46,27 @@
         <span> {{ index + 1 }} </span>
       </template>
     </a-table>
+
+    <AddOrderModal
+      ref="refAddOrderModal"
+      @submit="
+        (value) => {
+          data.unshift(value);
+        }
+      "
+    />
   </div>
 </template>
 <script>
 import { ListPageColumns } from "../../configs/config";
 import { ListPageData } from "../../configs/data";
+import AddOrderModal from "./AddOrderModal.vue";
 
 export default {
   name: "ListPageTable",
+  components: {
+    AddOrderModal,
+  },
   data() {
     return {
       data: [...ListPageData],
@@ -76,7 +90,9 @@ export default {
     handleResetSelected() {
       this.selectedRowKeys = [];
     },
-    handleAdd() {},
+    handleAdd() {
+      this.$refs.refAddOrderModal.showModal();
+    },
     handleDelete() {
       this.data = this.data.filter(
         (item) => !this.selectedRowKeys.includes(item.orderNo)
