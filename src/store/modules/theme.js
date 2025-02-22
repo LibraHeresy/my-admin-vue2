@@ -4,13 +4,13 @@ const store = {
     theme: "light",
   },
   mutations: {
-    setTheme(state, theme) {
-      state.theme = theme;
+    setTheme(state, data) {
+      state.theme = data;
     },
   },
   actions: {
-    setTheme({ commit }, theme) {
-      commit("setTheme", theme);
+    setTheme({ commit }, data) {
+      commit("setTheme", data);
     },
   },
 };

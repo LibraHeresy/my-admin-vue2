@@ -43,14 +43,6 @@ const routes = [
         },
         component: () => import("@/views/ExamplePage/StepFormPage.vue"),
       },
-      {
-        path: "/example-page/advanced-form-page",
-        name: "AdvancedFormPage",
-        meta: {
-          title: "高级表单页",
-        },
-        component: () => import("@/views/ExamplePage/AdvancedFormPage.vue"),
-      },
     ],
   },
 ];

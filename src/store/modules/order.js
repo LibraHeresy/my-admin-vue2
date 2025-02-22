@@ -13,13 +13,13 @@ const store = {
     },
   },
   mutations: {
-    setOrder(state, order) {
-      state.order = order;
+    setOrder(state, data) {
+      state.order = data;
     },
   },
   actions: {
-    setOrder({ commit }, order) {
-      commit("setOrder", order);
+    setOrder({ commit }, data) {
+      commit("setOrder", data);
     },
   },
 };

@@ -124,6 +124,7 @@ export default {
   align-items: center;
   flex-direction: column;
   padding-top: 200px;
+  background: url("../../assets/background.svg");
 
   .title {
     font-size: 33px;
@@ -140,6 +141,7 @@ export default {
     background-color: #ffffff;
     padding: 40px 40px 60px 40px;
     border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 
     .login-button {
       width: 100%;

@@ -1,24 +1,16 @@
 <template>
   <a-card style="border-radius: 10px" :bordered="false">
     <div class="step-form-page">
-      <a-steps :current="currentStep">
-        <a-step>
-          <!-- <span slot="title">Finished</span> -->
-          <template slot="title"> Finished </template>
-          <span slot="description">This is a description.</span>
-        </a-step>
-        <a-step
-          title="In Progress"
-          sub-title="Left 00:00:08"
-          description="This is a description."
-        />
-        <a-step title="Waiting" description="This is a description." />
+      <a-steps :current="step">
+        <a-step title="填写转账信息" />
+        <a-step title="确认转账信息" />
+        <a-step title="完成" />
       </a-steps>
 
       <div class="step-form-action">
-        <StepForm1 v-if="currentStep === 0" />
-        <StepForm2 v-if="currentStep === 1" />
-        <StepForm3 v-if="currentStep === 2" />
+        <StepForm1 v-if="step === 0" />
+        <StepForm2 v-if="step === 1" />
+        <StepForm3 v-if="step === 2" />
       </div>
     </div>
   </a-card>
@@ -28,6 +20,7 @@
 import StepForm1 from "./components/StepFormPage/StepForm1.vue";
 import StepForm2 from "./components/StepFormPage/StepForm2.vue";
 import StepForm3 from "./components/StepFormPage/StepForm3.vue";
+import { mapState, mapMutations } from "vuex";
 
 export default {
   name: "StepFormPage",
@@ -37,17 +30,30 @@ export default {
     StepForm3,
   },
   data() {
-    return {
-      currentStep: 2,
-    };
+    return {};
   },
-  methods: {},
+  computed: {
+    ...mapState("step", ["step"]),
+  },
+  mounted() {
+    this.setTransferInfo(null);
+    this.setStep(0);
+  },
+  methods: {
+    ...mapMutations("step", ["setStep", "setTransferInfo"]),
+    prevStep() {
+      this.setStep(this.step - 1);
+    },
+    nextStep() {
+      this.setStep(this.step + 1);
+    },
+  },
 };
 </script>
 
 <style lang="less" scoped>
 .step-form-page {
-  width: 1000px;
+  width: 800px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;

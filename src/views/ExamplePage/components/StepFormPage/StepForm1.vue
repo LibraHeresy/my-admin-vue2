@@ -1,131 +1,115 @@
 <template>
   <a-form-model
     ref="ruleForm"
-    :model="form"
+    :model="ruleForm"
     :rules="rules"
     :label-col="labelCol"
     :wrapper-col="wrapperCol"
   >
-    <a-form-model-item ref="name" label="Activity name" prop="name">
-      <a-input
-        v-model="form.name"
-        @blur="
-          () => {
-            $refs.name.onFieldBlur();
-          }
-        "
-      />
-    </a-form-model-item>
-    <a-form-model-item label="Activity zone" prop="region">
-      <a-select v-model="form.region" placeholder="please select your zone">
-        <a-select-option value="shanghai"> Zone one </a-select-option>
-        <a-select-option value="beijing"> Zone two </a-select-option>
+    <a-form-model-item label="付款账户" prop="paymentAccount">
+      <a-select
+        v-model="ruleForm.paymentAccount"
+        placeholder="my-admin-vue2@alipay.com"
+      >
+        <a-select-option value="my-admin-vue2@alipay.com">
+          my-admin-vue2@alipay.com
+        </a-select-option>
       </a-select>
     </a-form-model-item>
-    <a-form-model-item label="Activity time" required prop="date1">
-      <a-date-picker
-        v-model="form.date1"
-        show-time
-        type="date"
-        placeholder="Pick a date"
-        style="width: 100%"
+    <a-form-model-item label="收款账户" prop="receiverAccount">
+      <a-input-group compact>
+        <a-select style="width: 20%" default-value="支付宝">
+          <a-select-option value="支付宝"> 支付宝 </a-select-option>
+          <a-select-option value="微信"> 微信 </a-select-option>
+        </a-select>
+        <a-input v-model="ruleForm.receiverAccount" style="width: 80%" />
+      </a-input-group>
+    </a-form-model-item>
+    <a-form-model-item label="收款人姓名" prop="receiver">
+      <a-input v-model="ruleForm.receiver" :maxLength="20" />
+    </a-form-model-item>
+    <a-form-model-item label="转账金额" prop="transferAmount">
+      <a-input
+        v-model="ruleForm.transferAmount"
+        type="number"
+        :maxLength="20"
       />
     </a-form-model-item>
-    <a-form-model-item label="Instant delivery" prop="delivery">
-      <a-switch v-model="form.delivery" />
-    </a-form-model-item>
-    <a-form-model-item label="Activity type" prop="type">
-      <a-checkbox-group v-model="form.type">
-        <a-checkbox value="1" name="type"> Online </a-checkbox>
-        <a-checkbox value="2" name="type"> Promotion </a-checkbox>
-        <a-checkbox value="3" name="type"> Offline </a-checkbox>
-      </a-checkbox-group>
-    </a-form-model-item>
-    <a-form-model-item label="Resources" prop="resource">
-      <a-radio-group v-model="form.resource">
-        <a-radio value="1"> Sponsor </a-radio>
-        <a-radio value="2"> Venue </a-radio>
-      </a-radio-group>
-    </a-form-model-item>
-    <a-form-model-item label="Activity form" prop="desc">
-      <a-input v-model="form.desc" type="textarea" />
-    </a-form-model-item>
     <a-form-model-item :wrapper-col="{ span: 14, offset: 6 }">
-      <a-button type="primary" @click="onSubmit"> Create </a-button>
-      <a-button style="margin-left: 10px" @click="resetForm"> Reset </a-button>
+      <a-button type="primary" @click="onSubmit"> 下一步 </a-button>
     </a-form-model-item>
   </a-form-model>
 </template>
+
 <script>
+import { mapState, mapMutations } from "vuex";
+
+class CreateRuleForm {
+  constructor() {
+    // 付款账户
+    this.paymentAccount = undefined;
+    // 收款账户
+    this.receiverAccount = "test@example.com";
+    // 收款人姓名
+    this.receiver = "Alex";
+    // 转账金额
+    this.transferAmount = "100.00";
+  }
+}
+
 export default {
   data() {
     return {
       labelCol: { span: 6 },
-      wrapperCol: { span: 16 },
-      other: "",
-      form: {
-        name: "",
-        region: undefined,
-        date1: undefined,
-        delivery: false,
-        type: [],
-        resource: "",
-        desc: "",
-      },
+      wrapperCol: { span: 14 },
+      ruleForm: new CreateRuleForm(),
       rules: {
-        name: [
+        paymentAccount: [
           {
             required: true,
-            message: "Please input Activity name",
-            trigger: "blur",
-          },
-          {
-            min: 3,
-            max: 5,
-            message: "Length should be 3 to 5",
-            trigger: "blur",
-          },
-        ],
-        region: [
-          {
-            required: true,
-            message: "Please select Activity zone",
+            message: "请选择付款账户",
             trigger: "change",
           },
         ],
-        date1: [
-          { required: true, message: "Please pick a date", trigger: "change" },
-        ],
-        type: [
+        receiverAccount: [
           {
-            type: "array",
             required: true,
-            message: "Please select at least one activity type",
+            message: "请选择收款账户",
             trigger: "change",
           },
         ],
-        resource: [
+        receiver: [
           {
             required: true,
-            message: "Please select activity resource",
+            message: "请输入收款人姓名",
             trigger: "change",
           },
         ],
-        desc: [
+        transferAmount: [
           {
             required: true,
-            message: "Please input activity form",
-            trigger: "blur",
+            message: "请输入转账金额",
+            trigger: "change",
           },
         ],
       },
     };
   },
+  computed: {
+    ...mapState("step", ["step", "transferInfo"]),
+  },
+  mounted() {
+    if (this.transferInfo) {
+      this.ruleForm = this.transferInfo;
+    }
+  },
   methods: {
+    ...mapMutations("step", ["setStep", "setTransferInfo"]),
     onSubmit() {
       this.$refs.ruleForm.validate((valid) => {
         if (valid) {
-          alert("submit!");
+          this.setTransferInfo(this.ruleForm);
+          this.setStep(this.step + 1);
         } else {
           console.log("error submit!!");
           return false;
