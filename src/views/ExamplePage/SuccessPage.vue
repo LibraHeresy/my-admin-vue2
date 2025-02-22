@@ -2,25 +2,16 @@
   <a-card style="border-radius: 10px" :bordered="false">
     <a-result
       status="success"
-      title="Successfully Purchased Cloud Server ECS!"
-      sub-title="Order number: 2017182818828182881 Cloud server configuration takes 1-5 minutes, please wait."
+      title="恭喜你成功订购本商品！"
+      sub-title="订单号: 20200808-1111 虚拟商品 5 分钟后到账"
     >
       <div>
-        <div class="step-title">User Info</div>
-        <a-steps :current="1">
-          <a-popover
-            slot="progressDot"
-            slot-scope="{ index, status, prefixCls }"
-          >
-            <template slot="content">
-              <span>step {{ index }} status: {{ status }}</span>
-            </template>
-            <span :class="`${prefixCls}-icon-dot`" />
-          </a-popover>
-          <a-step title="Finished" description="You can hover on the dot." />
-          <a-step title="In Progress" description="You can hover on the dot." />
-          <a-step title="Waiting" description="You can hover on the dot." />
-          <a-step title="Waiting" description="You can hover on the dot." />
+        <div class="step-title">订单进度</div>
+        <a-steps :current="0">
+          <a-step title="待入库" description="商品待入库" />
+          <a-step title="待发货" description="商品待发货" />
+          <a-step title="已发货" description="商品已发货" />
+          <a-step title="已签收" description="商品已签收" />
         </a-steps>
       </div>
       <template #extra>
@@ -29,13 +20,13 @@
           type="primary"
           @click="() => $router.push({ name: 'ListPage' })"
         >
-          Back List
+          返回列表
         </a-button>
         <a-button
           key="home"
           @click="() => $router.push({ path: '/workbenches' })"
         >
-          Back Home
+          返回工作台
         </a-button>
       </template>
     </a-result>
