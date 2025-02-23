@@ -213,7 +213,9 @@ export default {
       });
     },
     getTitle(item) {
-      return item.meta?.i18n ? this.$t(item.meta.i18n) : item.meta?.title;
+      return item?.meta?.i18n
+        ? this.$t(item.meta.i18n)
+        : item?.meta?.title || "";
     },
   },
 };

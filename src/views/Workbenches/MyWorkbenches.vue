@@ -1,18 +1,29 @@
 <template>
   <div class="my-workbenches">
-    <div class="desc-cards">
-      <TotalSales class="desc-card" :info="info" />
-      <TotalVisitors ref="refTotalVisitors" class="desc-card" :info="info" />
-      <TotalOrders ref="refTotalOrders" class="desc-card" :info="info" />
-      <TotalProgress class="desc-card" :info="info" />
-    </div>
+    <a-skeleton
+      :class="{
+        skeleton: loading,
+      }"
+      active
+      :loading="loading"
+      :paragraph="{
+        rows: 18,
+      }"
+    >
+      <div class="desc-cards">
+        <TotalSales class="desc-card" :info="info" />
+        <TotalVisitors ref="refTotalVisitors" class="desc-card" :info="info" />
+        <TotalOrders ref="refTotalOrders" class="desc-card" :info="info" />
+        <TotalProgress class="desc-card" :info="info" />
+      </div>
 
-    <SalesDataCard class="sales-data-card" />
+      <SalesDataCard class="sales-data-card" />
 
-    <div class="info-cards">
-      <OnlineTopSearch class="info-card" />
-      <ProportionOfSales class="info-card" />
-    </div>
+      <div class="info-cards">
+        <OnlineTopSearch class="info-card" />
+        <ProportionOfSales class="info-card" />
+      </div>
+    </a-skeleton>
   </div>
 </template>
 
@@ -113,6 +124,7 @@ export default {
   data() {
     return {
       info: new CreateInfo(),
+      loading: true,
     };
   },
   mounted() {
@@ -121,13 +133,27 @@ export default {
         this.info = res.data;
 
         setTimeout(() => {
-          this.$refs.refTotalVisitors.renderChart();
-          this.$refs.refTotalOrders.renderChart();
+          this.renderChart();
         });
       }
     });
+
+    setTimeout(() => {
+      this.loading = false;
+    }, 2000);
   },
-  methods: {},
+  methods: {
+    renderChart() {
+      if (this.$refs.refTotalVisitors && this.$refs.refTotalOrders) {
+        this.$refs.refTotalVisitors.renderChart();
+        this.$refs.refTotalOrders.renderChart();
+      } else {
+        setTimeout(() => {
+          this.renderChart();
+        });
+      }
+    },
+  },
 };
 </script>
 
@@ -169,5 +195,11 @@ export default {
       }
     }
   }
+}
+.skeleton {
+  background-color: #ffffff;
+  padding: 24px;
+  border-radius: 10px;
+  height: 100%;
 }
 </style>
