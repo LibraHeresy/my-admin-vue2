@@ -12,11 +12,6 @@ const store = {
       state.transferInfo = data;
     },
   },
-  actions: {
-    setStep({ commit }, data) {
-      commit("setStep", data);
-    },
-  },
 };
 
 export default store;

@@ -7,6 +7,7 @@ const routes = [
     meta: {
       title: "工作台",
       icon: "desktop",
+      i18n: "workbenches",
     },
     component: MyWorkbenches,
   },

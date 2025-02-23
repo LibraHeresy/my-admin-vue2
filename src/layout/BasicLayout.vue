@@ -31,7 +31,7 @@
           <template v-if="!item.hideInMenu">
             <a-menu-item v-if="!item.children" :key="item.path">
               <a-icon v-if="item.meta?.icon" :type="item.meta.icon" />
-              <span v-if="!collapsed">{{ item.meta?.title }}</span>
+              <span v-if="!collapsed">{{ getTitle(item) }}</span>
             </a-menu-item>
             <SubMenu
               v-else
@@ -44,17 +44,63 @@
       </a-menu>
     </a-layout-sider>
     <a-layout>
-      <a-layout-header style="background: #fff; padding: 0">
+      <a-layout-header
+        style="
+          background: #fff;
+          padding: 0;
+          display: flex;
+          justify-content: space-between;
+        "
+      >
         <a-icon
           class="trigger"
           :type="collapsed ? 'menu-unfold' : 'menu-fold'"
           @click="() => (collapsed = !collapsed)"
         />
+        <div style="margin-right: 48px">
+          <a-dropdown>
+            <a-icon class="dropdown-icon" type="user" />
+            <a-menu slot="overlay">
+              <a-menu-item>
+                <a
+                  href="javascript:;"
+                  @click="() => $router.push({ path: '/setting' })"
+                >
+                  个人设置
+                </a>
+              </a-menu-item>
+              <a-menu-item>
+                <a href="javascript:;" @click="() => logout()">退出登录</a>
+              </a-menu-item>
+            </a-menu>
+          </a-dropdown>
+          <a-dropdown>
+            <a-icon class="dropdown-icon" type="global" />
+            <a-menu slot="overlay">
+              <a-menu-item>
+                <a
+                  href="javascript:;"
+                  @click="() => handleChangeLanguage('zhCN')"
+                >
+                  中文
+                </a>
+              </a-menu-item>
+              <a-menu-item>
+                <a
+                  href="javascript:;"
+                  @click="() => handleChangeLanguage('enUS')"
+                >
+                  English
+                </a>
+              </a-menu-item>
+            </a-menu>
+          </a-dropdown>
+        </div>
       </a-layout-header>
       <a-layout-content>
         <div class="content-header">
           <a-breadcrumb>
-            <a-breadcrumb-item>首页</a-breadcrumb-item>
+            <a-breadcrumb-item>{{ $t("home") }}</a-breadcrumb-item>
             <a-breadcrumb-item v-for="title in breadcrumbs" :key="title">
               <a href="">{{ title }}</a>
             </a-breadcrumb-item>
@@ -73,7 +119,7 @@
   </a-layout>
 </template>
 <script>
-import { mapState } from "vuex";
+import { mapState, mapMutations } from "vuex";
 import SubMenu from "./SubMenu.vue";
 
 export default {
@@ -92,7 +138,7 @@ export default {
     };
   },
   computed: {
-    ...mapState("theme", ["theme"]),
+    ...mapState("theme", ["theme", "localLanguage"]),
   },
   watch: {
     collapsed(val) {
@@ -110,6 +156,9 @@ export default {
       },
       immediate: true,
     },
+    localLanguage() {
+      this.getBreadcrumb();
+    },
   },
   created() {
     const menuRoute =
@@ -122,6 +171,7 @@ export default {
     this.getBreadcrumb();
   },
   methods: {
+    ...mapMutations("theme", ["setLocalLanguage"]),
     setMenusMap(routes, parentPath = "") {
       routes.map((route) => {
         this.menusMap[route.path] = {
@@ -146,12 +196,24 @@ export default {
     getBreadcrumbTitle(path) {
       let breadcrumb = [];
       const ob = this.menusMap[path];
-      breadcrumb.push(ob?.meta?.title || "");
+      breadcrumb.push(this.getTitle(ob) || "");
       if (ob?.parentPath) {
         const arr = this.getBreadcrumbTitle(ob.parentPath);
         breadcrumb.push(...arr);
       }
       return breadcrumb;
+    },
+    handleChangeLanguage(value) {
+      this.setLocalLanguage(value);
+    },
+    logout() {
+      localStorage.removeItem("token");
+      this.$router.push({
+        path: "/login",
+      });
+    },
+    getTitle(item) {
+      return item.meta?.i18n ? this.$t(item.meta.i18n) : item.meta?.title;
     },
   },
 };
@@ -206,5 +268,13 @@ export default {
   flex-direction: column;
   justify-content: center;
   padding: 24px;
+}
+
+.dropdown-icon {
+  font-size: 18px;
+  line-height: 64px;
+  padding-left: 28px;
+  cursor: pointer;
+  transition: color 0.3s;
 }
 </style>

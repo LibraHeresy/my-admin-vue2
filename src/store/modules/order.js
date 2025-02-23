@@ -17,11 +17,6 @@ const store = {
       state.order = data;
     },
   },
-  actions: {
-    setOrder({ commit }, data) {
-      commit("setOrder", data);
-    },
-  },
 };
 
 export default store;

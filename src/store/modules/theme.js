@@ -1,16 +1,18 @@
+import i18n from "@/language/i18n";
+
 const store = {
   namespaced: true,
   state: {
     theme: "light",
+    localLanguage: "zhCN",
   },
   mutations: {
     setTheme(state, data) {
       state.theme = data;
     },
-  },
-  actions: {
-    setTheme({ commit }, data) {
-      commit("setTheme", data);
+    setLocalLanguage(state, data) {
+      state.localLanguage = data;
+      i18n.locale = data;
     },
   },
 };

@@ -27,6 +27,7 @@ const routes = [
         meta: {
           title: "个人设置",
           icon: "setting",
+          i18n: "personalSettings",
         },
         component: () =>
           import(

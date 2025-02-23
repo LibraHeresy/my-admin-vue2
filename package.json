@@ -24,6 +24,7 @@
     "mockjs": "^1.1.0",
     "moment": "^2.30.1",
     "vue": "^2.7.0",
+    "vue-i18n": "^8.28.2",
     "vue-router": "^3.5.1",
     "vuex": "^3.6.2",
     "vuex-persistedstate": "^4.1.0"

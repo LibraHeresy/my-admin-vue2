@@ -6,6 +6,7 @@ const routes = [
     meta: {
       title: "示例页",
       icon: "bulb",
+      i18n: "examplePage",
     },
     component: {
       render: (h) => h("router-view"),
@@ -16,6 +17,7 @@ const routes = [
         name: "ListPage",
         meta: {
           title: "列表页",
+          i18n: "listPage",
         },
         component: () => import("@/views/ExamplePage/ListPage.vue"),
       },
@@ -24,6 +26,7 @@ const routes = [
         name: "DetailPage",
         meta: {
           title: "详情页",
+          i18n: "detailPage",
         },
         component: () => import("@/views/ExamplePage/DetailPage.vue"),
       },
@@ -32,6 +35,7 @@ const routes = [
         name: "SuccessPage",
         meta: {
           title: "成功页",
+          i18n: "successPage",
         },
         component: () => import("@/views/ExamplePage/SuccessPage.vue"),
       },
@@ -40,6 +44,7 @@ const routes = [
         name: "StepFormPage",
         meta: {
           title: "分布表单页",
+          i18n: "stepFormPage",
         },
         component: () => import("@/views/ExamplePage/StepFormPage.vue"),
       },

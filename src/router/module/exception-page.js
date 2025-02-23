@@ -6,6 +6,7 @@ const routes = [
     meta: {
       title: "异常页",
       icon: "warning",
+      i18n: "exceptionPage",
     },
     component: {
       render: (h) => h("router-view"),
