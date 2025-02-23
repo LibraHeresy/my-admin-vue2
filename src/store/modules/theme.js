@@ -3,7 +3,7 @@ import i18n from "@/language/i18n";
 const store = {
   namespaced: true,
   state: {
-    theme: "light",
+    theme: "dark",
     localLanguage: "zhCN",
   },
   mutations: {

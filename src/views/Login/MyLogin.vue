@@ -25,6 +25,7 @@
                 type="text"
                 autocomplete="off"
                 :maxLength="20"
+                placeholder="admin"
               >
                 <a-icon slot="prefix" type="user" />
               </a-input>
@@ -36,6 +37,7 @@
                 type="password"
                 autocomplete="off"
                 :maxLength="20"
+                placeholder="123456"
               >
                 <a-icon slot="prefix" type="lock" />
               </a-input>
@@ -96,16 +98,19 @@ export default {
     submitForm() {
       this.$refs.refRuleForm.validate((valid) => {
         if (valid) {
-          localStorage.setItem("token", "123");
-          this.$router.push({
-            path: "/",
-          });
-        } else {
-          this.$notification.error({
-            message: "登录失败",
-            description: "账号/密码错误",
-          });
-          return false;
+          if (
+            this.ruleForm.account === "admin" &&
+            this.ruleForm.password === "123456"
+          ) {
+            this.$message.success("登录成功");
+
+            localStorage.setItem("token", "token");
+            this.$router.push({
+              path: "/",
+            });
+          } else {
+            this.$message.error("账号或密码错误");
+          }
         }
       });
     },
