@@ -7,6 +7,7 @@ const routes = [
       title: "示例页",
       icon: "bulb",
       i18n: "examplePage",
+      role: ["admin"],
     },
     component: {
       render: (h) => h("router-view"),

@@ -7,6 +7,7 @@ const routes = [
       title: "异常页",
       icon: "warning",
       i18n: "exceptionPage",
+      role: ["admin"],
     },
     component: {
       render: (h) => h("router-view"),

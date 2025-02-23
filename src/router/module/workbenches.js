@@ -8,6 +8,7 @@ const routes = [
       title: "工作台",
       icon: "desktop",
       i18n: "workbenches",
+      role: ["admin"],
     },
     component: MyWorkbenches,
   },
