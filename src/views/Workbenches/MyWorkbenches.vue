@@ -1,29 +1,81 @@
 <template>
   <div class="my-workbenches">
+    <div class="desc-cards">
+      <a-skeleton
+        class="desc-card"
+        :class="{
+          skeleton: loading,
+        }"
+        active
+        :loading="loading"
+      >
+        <TotalSales class="desc-card" :info="info" />
+      </a-skeleton>
+      <a-skeleton
+        class="desc-card"
+        :class="{
+          skeleton: loading,
+        }"
+        active
+        :loading="loading"
+      >
+        <TotalVisitors ref="refTotalVisitors" class="desc-card" :info="info" />
+      </a-skeleton>
+      <a-skeleton
+        class="desc-card"
+        :class="{
+          skeleton: loading,
+        }"
+        active
+        :loading="loading"
+      >
+        <TotalOrders ref="refTotalOrders" class="desc-card" :info="info" />
+      </a-skeleton>
+      <a-skeleton
+        class="desc-card"
+        :class="{
+          skeleton: loading,
+        }"
+        active
+        :loading="loading"
+      >
+        <TotalProgress class="desc-card" :info="info" />
+      </a-skeleton>
+    </div>
+
     <a-skeleton
+      class="sales-data-card"
       :class="{
         skeleton: loading,
       }"
       active
       :loading="loading"
-      :paragraph="{
-        rows: 18,
-      }"
     >
-      <div class="desc-cards">
-        <TotalSales class="desc-card" :info="info" />
-        <TotalVisitors ref="refTotalVisitors" class="desc-card" :info="info" />
-        <TotalOrders ref="refTotalOrders" class="desc-card" :info="info" />
-        <TotalProgress class="desc-card" :info="info" />
-      </div>
-
       <SalesDataCard class="sales-data-card" />
-
-      <div class="info-cards">
-        <OnlineTopSearch class="info-card" />
-        <ProportionOfSales class="info-card" />
-      </div>
     </a-skeleton>
+
+    <div class="info-cards">
+      <a-skeleton
+        class="info-card"
+        :class="{
+          skeleton: loading,
+        }"
+        active
+        :loading="loading"
+      >
+        <OnlineTopSearch class="info-card" />
+      </a-skeleton>
+      <a-skeleton
+        class="info-card"
+        :class="{
+          skeleton: loading,
+        }"
+        active
+        :loading="loading"
+      >
+        <ProportionOfSales class="info-card" />
+      </a-skeleton>
+    </div>
   </div>
 </template>
 
@@ -140,7 +192,7 @@ export default {
 
     setTimeout(() => {
       this.loading = false;
-    }, 1000);
+    }, 1500);
   },
   methods: {
     renderChart() {
