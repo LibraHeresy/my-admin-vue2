@@ -3,10 +3,16 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve --mode development",
+    "serve": "vue-cli-service serve",
+    "serve:dev": "vue-cli-service serve --mode development",
+    "serve:preview": "vue-cli-service build --mode preview",
+    "serve:prod": "vue-cli-service serve --mode production",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
-    "test:unit": "vue-cli-service test:unit"
+    "build:dev": "vue-cli-service build --mode development",
+    "build:preview": "vue-cli-service build --mode preview",
+    "build:prod": "vue-cli-service build --mode production",
+    "test:unit": "vue-cli-service test:unit",
+    "lint": "vue-cli-service lint"
   },
   "dependencies": {
     "@wangeditor/editor": "^5.1.23",
@@ -15,6 +21,7 @@
     "axios": "^1.7.9",
     "core-js": "^3.8.3",
     "echarts": "^5.6.0",
+    "mockjs": "^1.1.0",
     "moment": "^2.30.1",
     "vue": "^2.7.0",
     "vue-i18n": "^8.28.2",
@@ -39,12 +46,11 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-vue": "^8.0.3",
     "jest": "^27.0.5",
-    "less": "^3.0.0",
-    "less-loader": "^7.0.0",
+    "less": "3.x",
+    "less-loader": "7.x",
     "lint-staged": "^11.1.2",
     "prettier": "^2.4.1",
-    "vue-template-compiler": "^2.6.14",
-    "mockjs": "^1.1.0"
+    "vue-template-compiler": "^2.6.14"
   },
   "gitHooks": {
     "pre-commit": "lint-staged"
