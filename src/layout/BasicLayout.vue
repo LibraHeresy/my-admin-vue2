@@ -1,5 +1,5 @@
 <template>
-  <a-layout id="components-layout-demo-custom-trigger">
+  <a-layout class="basic-layout">
     <a-layout-sider
       v-model="collapsed"
       :trigger="null"
@@ -221,10 +221,10 @@ export default {
 };
 </script>
 <style lang="less" scoped>
-#components-layout-demo-custom-trigger {
+.basic-layout {
   height: 100vh;
 }
-#components-layout-demo-custom-trigger .trigger {
+.basic-layout .trigger {
   font-size: 18px;
   line-height: 64px;
   padding: 0 24px;
@@ -232,11 +232,11 @@ export default {
   transition: color 0.3s;
 }
 
-#components-layout-demo-custom-trigger .trigger:hover {
+.basic-layout .trigger:hover {
   color: #1890ff;
 }
 
-#components-layout-demo-custom-trigger .logo-wrapper {
+.basic-layout .logo-wrapper {
   height: 32px;
   margin: 16px;
   text-align: center;
@@ -245,13 +245,13 @@ export default {
   justify-content: center;
 }
 
-#components-layout-demo-custom-trigger .logo {
+.basic-layout .logo {
   width: 32px;
   height: 32px;
   object-fit: contain;
 }
 
-#components-layout-demo-custom-trigger .title {
+.basic-layout .title {
   margin-left: 8px;
   white-space: nowrap;
   color: #ffffff;
@@ -259,7 +259,7 @@ export default {
   font-weight: 600;
 }
 
-#components-layout-demo-custom-trigger .content-header {
+.basic-layout .content-header {
   background-color: #ffffff;
   margin-top: 2px;
   height: 80px;
