@@ -2,12 +2,12 @@ import request from "./request";
 
 const userApi = {
   // 获取工作台数据
-  GetWorkbenchesData: "/api/workbenches/getData",
+  GetWorkbenchData: "/api/workbench/getData",
 };
 
-export function getWorkbenchesData(parameter) {
+export function getWorkbenchData(parameter) {
   return request({
-    url: userApi.GetWorkbenchesData,
+    url: userApi.GetWorkbenchData,
     method: "get",
     data: parameter,
   });

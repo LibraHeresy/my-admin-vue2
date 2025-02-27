@@ -3,14 +3,14 @@ import VueRouter from "vue-router";
 import BasicLayout from "@/layout/BasicLayout.vue";
 import ComponentRepository from "./module/example-page";
 import ExceptionPage from "./module/exception-page";
-import Workbenches from "./module/workbenches";
+import Workbench from "./module/workbench";
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: "/",
-    redirect: "/workbenches",
+    redirect: "/workbench",
     hideInMenu: true,
   },
   {
@@ -18,7 +18,7 @@ const routes = [
     name: "menu",
     component: BasicLayout,
     children: [
-      ...Workbenches,
+      ...Workbench,
       ...ComponentRepository,
       ...ExceptionPage,
       {

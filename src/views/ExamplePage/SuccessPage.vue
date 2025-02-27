@@ -24,7 +24,7 @@
         </a-button>
         <a-button
           key="home"
-          @click="() => $router.push({ path: '/workbenches' })"
+          @click="() => $router.push({ path: '/workbench' })"
         >
           返回工作台
         </a-button>

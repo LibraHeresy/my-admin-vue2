@@ -1,5 +1,5 @@
 <template>
-  <div class="my-workbenches">
+  <div class="my-workbench">
     <div class="desc-cards">
       <a-skeleton
         class="desc-card"
@@ -83,7 +83,7 @@
 import SalesDataCard from "./components/SalesDataCard.vue";
 import OnlineTopSearch from "./components/OnlineTopSearch.vue";
 import ProportionOfSales from "./components/ProportionOfSales.vue";
-import { getWorkbenchesData } from "@/api/common";
+import { getWorkbenchData } from "@/api/common";
 import TotalSales from "./components/TotalSales.vue";
 import TotalVisitors from "./components/TotalVisitors.vue";
 import TotalOrders from "./components/TotalOrders.vue";
@@ -163,7 +163,7 @@ class CreateInfo {
 }
 
 export default {
-  name: "MyWorkbenches",
+  name: "MyWorkbench",
   components: {
     SalesDataCard,
     OnlineTopSearch,
@@ -180,7 +180,7 @@ export default {
     };
   },
   mounted() {
-    getWorkbenchesData({}).then((res) => {
+    getWorkbenchData({}).then((res) => {
       if (res.code === 200) {
         this.info = res.data;
 
@@ -210,7 +210,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.my-workbenches {
+.my-workbench {
   .desc-cards {
     display: flex;
     align-items: center;

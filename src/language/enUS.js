@@ -1,6 +1,6 @@
 export default {
   home: "Home",
-  workbenches: "Workbenches",
+  workbench: "Workbench",
   examplePage: "Example Page",
   exceptionPage: "Exception Page",
   personalSettings: "Personal Settings",

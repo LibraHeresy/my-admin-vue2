@@ -1,6 +1,6 @@
 export default {
   home: "首页",
-  workbenches: "工作台",
+  workbench: "工作台",
   examplePage: "示例页",
   exceptionPage: "异常页",
   personalSettings: "个人设置",

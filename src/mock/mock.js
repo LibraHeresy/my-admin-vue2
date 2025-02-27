@@ -1,6 +1,6 @@
 import Mock from "mockjs";
 
-Mock.mock("/api/workbenches/getData", "get", {
+Mock.mock("/api/workbench/getData", "get", {
   code: 200,
   message: "成功",
   data: Mock.mock({
