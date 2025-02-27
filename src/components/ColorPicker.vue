@@ -14,9 +14,6 @@
       }"
       @click="handleClick"
     />
-    <div class="color-picker-text">
-      {{ color }}
-    </div>
   </div>
 </template>
 
@@ -72,7 +69,6 @@ export default {
     height: 24px;
     cursor: pointer;
     border: 1px solid #ccc;
-    margin-right: 4px;
     border-radius: 4px;
   }
   .color-picker-text {
