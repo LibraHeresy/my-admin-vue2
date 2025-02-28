@@ -8,8 +8,8 @@ Mock.mock("/api/workbench/getData", "get", {
     "todaySales|10000-100000": 1,
     "salesIncreasePrecent|0-2000": 1,
     "salesDecreasePrecent|0-2000": 1,
-    "totalVisitors|100000-1000000": 1,
-    "todayVisitors|10000-100000": 1,
+    "totalVistors|100000-1000000": 1,
+    "todayVistors|10000-100000": 1,
     "past7daysVisitors|7": [
       {
         "visitors|10000-100000": 1,

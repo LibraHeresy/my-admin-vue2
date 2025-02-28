@@ -1,11 +1,11 @@
 <template>
   <MyCard title="总访客数">
     <template slot="number">
-      <span>{{ info.totalVisitors.toLocaleString() }}</span>
+      <span>{{ info.totalVistors.toLocaleString() }}</span>
     </template>
     <div id="total-visitors-chart" class="total-visitors-chart"></div>
     <template slot="desc">
-      <span>每日访客数 {{ info.todayVisitors.toLocaleString() }}</span>
+      <span>每日访客数 {{ info.todayVistors.toLocaleString() }}</span>
     </template>
   </MyCard>
 </template>
@@ -22,7 +22,7 @@ import { CanvasRenderer } from "echarts/renderers";
 echarts.use([GridComponent, LineChart, CanvasRenderer, UniversalTransition]);
 
 export default {
-  name: "TotalVisitors",
+  name: "TotalVistors",
   components: {
     MyCard,
   },

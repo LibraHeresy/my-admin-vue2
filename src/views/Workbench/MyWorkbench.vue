@@ -19,7 +19,7 @@
         active
         :loading="loading"
       >
-        <TotalVisitors ref="refTotalVisitors" class="desc-card" :info="info" />
+        <TotalVistors ref="refTotalVistors" class="desc-card" :info="info" />
       </a-skeleton>
       <a-skeleton
         class="desc-card"
@@ -85,7 +85,7 @@ import OnlineTopSearch from "./components/OnlineTopSearch.vue";
 import ProportionOfSales from "./components/ProportionOfSales.vue";
 import { getWorkbenchData } from "@/api/common";
 import TotalSales from "./components/TotalSales.vue";
-import TotalVisitors from "./components/TotalVisitors.vue";
+import TotalVistors from "./components/TotalVistors.vue";
 import TotalOrders from "./components/TotalOrders.vue";
 import TotalProgress from "./components/TotalProgress.vue";
 
@@ -100,9 +100,9 @@ class CreateInfo {
     // 销售额下降率
     this.salesDecreasePrecent = 50;
     // 总访客数
-    this.totalVisitors = 830355;
+    this.totalVistors = 830355;
     // 今日访客数
-    this.todayVisitors = 93036;
+    this.todayVistors = 93036;
     // 7天访客数
     (this.past7daysVisitors = [
       {
@@ -169,7 +169,7 @@ export default {
     OnlineTopSearch,
     ProportionOfSales,
     TotalSales,
-    TotalVisitors,
+    TotalVistors,
     TotalOrders,
     TotalProgress,
   },
@@ -196,8 +196,8 @@ export default {
   },
   methods: {
     renderChart() {
-      if (this.$refs.refTotalVisitors && this.$refs.refTotalOrders) {
-        this.$refs.refTotalVisitors.renderChart();
+      if (this.$refs.refTotalVistors && this.$refs.refTotalOrders) {
+        this.$refs.refTotalVistors.renderChart();
         this.$refs.refTotalOrders.renderChart();
       } else {
         setTimeout(() => {
